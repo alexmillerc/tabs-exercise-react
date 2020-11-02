@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import ReactDOM from "react-dom";
+import { Tab } from "./components/Tab";
 
-function App() {
+import "./App.css";
+import "./components/Tab.css"
+
+
+export const App = () => {
+
+  const [activeTab, setActiveTab] = useState("casas");
+  const TabItem = (tab, label) => {
+    return (
+      <li
+        onClick={() => setActiveTab(tab)}
+        className={activeTab === tab ? "active" : ""}
+      >
+        {label}
+      </li>
+    );
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="Tabs">
+        <ul>
+          {TabItem("casas", "Casas")}
+          {TabItem("carros", "Carros")}
+          {TabItem("games", "Games")}
+        </ul>
+      </div>
+      <div>
+          < Tab activeTab={activeTab} />
+      </div>
+    </>
   );
 }
 
-export default App;
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
